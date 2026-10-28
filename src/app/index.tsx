@@ -1,19 +1,33 @@
-
 import { useState } from 'react';
 import {
   Pressable,
+  ScrollView,
   Text,
   TextInput,
   View,
 } from 'react-native';
 
+import TaskItem from '../components/TaskItem';
 import { styles } from '../styles/taskStyles';
+import { Task } from '../types/Task';
 
 export default function HomeScreen() {
-  const [tasks, setTasks] = useState<string[]>([
-    'Learn React Native',
-    'Build my first screen',
-    'Set up Expo',
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      id: '1',
+      title: 'Learn React Native',
+      completed: false,
+    },
+    {
+      id: '2',
+      title: 'Build my first screen',
+      completed: false,
+    },
+    {
+      id: '3',
+      title: 'Set up Expo',
+      completed: false,
+    },
   ]);
 
   const [newTask, setNewTask] = useState('');
@@ -25,8 +39,30 @@ export default function HomeScreen() {
       return;
     }
 
-    setTasks([...tasks, trimmedTask]);
+    const task: Task = {
+      id: `${Date.now()}-${Math.random()}`,
+      title: trimmedTask,
+      completed: false,
+    };
+
+    setTasks((currentTasks) => [...currentTasks, task]);
     setNewTask('');
+  }
+
+  function toggleTask(id: string) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
+  }
+
+  function deleteTask(id: string) {
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.id !== id)
+    );
   }
 
   return (
@@ -55,13 +91,19 @@ export default function HomeScreen() {
         </Pressable>
       </View>
 
-      <View style={styles.taskList}>
-        {tasks.map((task, index) => (
-          <Text key={index} style={styles.task}>
-            {task}
-          </Text>
+      <ScrollView
+        style={styles.taskList}
+        contentContainerStyle={{ gap: 16, paddingBottom: 24 }}
+      >
+        {tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggle={toggleTask}
+            onDelete={deleteTask}
+          />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }

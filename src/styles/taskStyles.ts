@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -21,13 +20,6 @@ export const styles = StyleSheet.create({
   taskList: {
     marginTop: 32,
     gap: 16,
-  },
-  task: {
-    fontSize: 18,
-    color: '#202020',
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    borderRadius: 8,
   },
   inputRow: {
     flexDirection: 'row',
