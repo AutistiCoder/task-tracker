@@ -29,4 +29,31 @@ export const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
   },
+  inputRow: {
+    flexDirection: 'row',
+    marginTop: 24,
+    gap: 8,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    color: '#202020',
+  },
+  addButton: {
+    backgroundColor: '#18019B',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
